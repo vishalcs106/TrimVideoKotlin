@@ -10,7 +10,7 @@
         tools:layout="@layout/fragment_select_video">
 
         <action
-            android:id="@+id/action_view_pager_fragment_to_plant_detail_fragment"
+            android:id="@+id/action_select_video_fragment_to_trim_video_fragment"
             app:destination="@id/trim_video_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
@@ -23,6 +23,12 @@
         android:label="@string/trim_video"
         tools:layout="@layout/fragment_trim_video">
 
+        <action
+            android:id="@+id/action_trim_video_fragment_to_play_video_fragment"
+            app:destination="@id/trim_video_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
         <argument
             android:name="uriString"
             app:argType="string" />
@@ -31,5 +37,20 @@
             app:argType="string" />
 
     </fragment>
+
+
+
+    <fragment
+        android:id="@+id/play_video_fragment"
+        android:name="com.trendingrepos.trimvideo.PlayVideoFragment"
+        android:label="@string/play_video"
+        tools:layout="@layout/fragment_play_video">
+
+        <argument
+            android:name="uriString"
+            app:argType="string" />
+
+    </fragment>
+
 
 </navigation>

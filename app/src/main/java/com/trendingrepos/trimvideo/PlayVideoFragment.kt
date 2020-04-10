@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class PlayVideo : Fragment() {
+class PlayVideoFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PlayVideo()
+        fun newInstance() = PlayVideoFragment()
     }
 
     private lateinit var viewModel: PlayVideoViewModel

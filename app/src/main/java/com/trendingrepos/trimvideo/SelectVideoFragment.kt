@@ -96,7 +96,7 @@ class SelectVideoFragment : Fragment() {
 
     private fun navigateToVideoView( path : String, uriString : String) {
         val direction =
-            SelectVideoFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(uriString, path)
+            SelectVideoFragmentDirections.actionSelectVideoFragmentToTrimVideoFragment(uriString, path)
         binding.root.findNavController().navigate(direction)
     }
 
