@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TrimVideo</string>
+    <string name="select_video">Select Video</string>
+    <string name="trim_video">Trim Video</string>
+    <string name="trim">Trim</string>
+</resources>
