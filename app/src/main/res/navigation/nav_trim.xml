@@ -25,7 +25,7 @@
 
         <action
             android:id="@+id/action_trim_video_fragment_to_play_video_fragment"
-            app:destination="@id/trim_video_fragment"
+            app:destination="@id/play_video_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
 

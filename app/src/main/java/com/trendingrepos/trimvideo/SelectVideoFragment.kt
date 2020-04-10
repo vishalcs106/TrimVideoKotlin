@@ -24,10 +24,6 @@ class SelectVideoFragment : Fragment() {
 
     private lateinit var binding: FragmentSelectVideoBinding
 
-    companion object {
-        fun newInstance() = SelectVideoFragment()
-    }
-
     private lateinit var viewModel: SelectVideoViewModel
 
     override fun onCreateView(

@@ -15,26 +15,24 @@ import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException
+import com.trendingrepos.trimvideo.databinding.FragmentSelectVideoBinding
+import com.trendingrepos.trimvideo.databinding.FragmentSelectVideoBinding.*
 import com.trendingrepos.trimvideo.databinding.FragmentTrimVideoBinding
 import java.io.File
 
 
 class TrimVideoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TrimVideoFragment()
-    }
-
+    private lateinit var binding: FragmentTrimVideoBinding
     private lateinit var viewModel: TrimVideoViewModel
     private val args: TrimVideoFragmentArgs by navArgs()
     private var duration : Int = 0
-    private var destString : String = ""
+    private var dest : File? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentTrimVideoBinding>(
-            inflater, R.layout.fragment_trim_video, container, false)
+         binding = FragmentTrimVideoBinding.inflate(inflater, container, false)
         val uri = Uri.parse(args.uriString)
         binding.videoView.setVideoURI(uri)
         binding.videoView.requestFocus()
@@ -51,33 +49,23 @@ class TrimVideoFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(TrimVideoViewModel::class.java)
     }
 
-
     private fun executeCutVideoCommand(startMs: Int, endMs: Int) {
         val dir = File(requireContext().filesDir, "cut_videos")
         if(!dir.exists()){
             dir.mkdir()
         }
 
-//        val ffmpegDir = File(requireContext().filesDir, "ffmpeg")
-//        if(!ffmpegDir.exists()){
-//            ffmpegDir.mkdir()
-//        }
-
         val filePrefix = "cut_video"
         val fileExtn = ".mp4"
 
-        var dest = File(dir, filePrefix + fileExtn)
-        destString = dest.absolutePath
+        dest = File(dir, filePrefix + fileExtn)
+
         var fileNo = 0
-        while (dest.exists()) {
+        while (dest!!.exists()) {
             fileNo++
             dest = File(dir, filePrefix + fileNo + fileExtn)
         }
-        Log.d("MainActivity.TAG", "startTrim: src: ${args.path}")
-        Log.d("MainActivity.TAG", "startTrim: dest: " + dest.absolutePath)
-        Log.d("MainActivity.TAG", "startTrim: startMs: $startMs")
-        Log.d("MainActivity.TAG", "startTrim: endMs: $endMs")
-        val filePath = dest.absolutePath
+        val filePath = dest!!.absolutePath
         val complexCommand = arrayOf( "-ss", "" + 10, "-y", "-i", args.path, "-t",
             "" + (duration-10), "-vcodec", "mpeg4", "-b:v", "2097152", "-b:a", "48000",
             "-ac", "2", "-ar", "22050", filePath
@@ -87,46 +75,31 @@ class TrimVideoFragment : Fragment() {
 
     private fun execFFmpegBinary(command: Array<String>) {
         val ffmpeg = FFmpeg.getInstance(requireContext())
-
         ffmpeg.loadBinary(object : LoadBinaryResponseHandler() {
-            override fun onFailure() {
-                System.out.println("")
-            }
-
+            override fun onFailure() {}
             override fun onSuccess() {
                 try {
                     ffmpeg.execute(command, object : ExecuteBinaryResponseHandler() {
-                        override fun onFailure(s: String) {
-                            System.out.println("")
-                        }
+                        override fun onFailure(s: String) {}
                         override fun onSuccess(s: String) {
                             navigateToVideoPreview()
                         }
                         override fun onProgress(s: String) {
                            Log.d("Progress", s)
                         }
-                        override fun onStart() {
-                            System.out.println("")
-                        }
+                        override fun onStart() {}
 
-                        override fun onFinish() {
-                            System.out.println("")
-                        }
+                        override fun onFinish() {}
                     })
                 } catch (e: FFmpegCommandAlreadyRunningException) {
                 }
             }
         })
-
-
-
-
     }
 
     private fun navigateToVideoPreview() {
         val direction =
-            TrimVideoFragmentDirections.actionTrimVideoFragmentToPlayVideoFragment(uriString)
+            TrimVideoFragmentDirections.actionTrimVideoFragmentToPlayVideoFragment(Uri.fromFile(dest).toString())
         binding.root.findNavController().navigate(direction)
     }
-
 }
