@@ -56,5 +56,5 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation_version"
     implementation 'com.karumi:dexter:6.1.0'
-    implementation 'com.arthenica:mobile-ffmpeg-full:4.3.1'
+    implementation 'com.writingminds:FFmpegAndroid:0.3.2'
 }

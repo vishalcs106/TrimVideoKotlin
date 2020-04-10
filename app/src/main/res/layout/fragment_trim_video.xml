@@ -16,8 +16,7 @@
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="120dp"/>
+            android:layout_alignParentTop="true"/>
 
         <Button
             android:id="@+id/trim_bt"
@@ -30,13 +29,13 @@
 
         <EditText
             android:id="@+id/trim_start_et"
-            android:layout_width="60dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_above="@id/trim_bt"
             android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/trim_end_et"
-            android:layout_width="60dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_above="@id/trim_bt"
             android:layout_alignParentEnd="true"

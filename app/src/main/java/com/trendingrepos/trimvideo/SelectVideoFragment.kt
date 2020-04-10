@@ -85,34 +85,10 @@ class SelectVideoFragment : Fragment() {
                 val selectionArgs = arrayOf(
                     split[1]
                 )
-                val uriString = getDataColumn(contentUri, selection, selectionArgs)
+                val uriString = getFilePath(contentUri, selection, selectionArgs, requireContext())
                 uri?.let { uriString?.let { it1 -> navigateToVideoView(it1, it.toString()) } }
             }
         }
-    }
-
-
-
-
-    private fun getDataColumn( uri: Uri, selection: String, selectionArgs: Array<String>): String? {
-        var cursor: Cursor? = null
-        val column = "_data"
-        val projection = arrayOf(
-            column
-        )
-        try {
-            cursor = requireContext().contentResolver.query(
-                uri, projection, selection, selectionArgs,
-                null
-            )
-            if (cursor != null && cursor.moveToFirst()) {
-                val column_index = cursor.getColumnIndexOrThrow(column)
-                return cursor.getString(column_index)
-            }
-        } finally {
-            cursor?.close()
-        }
-        return null
     }
 
 
