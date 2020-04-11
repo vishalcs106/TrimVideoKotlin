@@ -4,4 +4,6 @@
     <string name="trim_video">Trim Video</string>
     <string name="trim">Trim</string>
     <string name="play_video">Play Video</string>
+    <string name="seconds">Seconds</string>
+    <string name="invalidInput">Invalid input</string>
 </resources>
