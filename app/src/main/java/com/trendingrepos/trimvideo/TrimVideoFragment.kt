@@ -43,11 +43,7 @@ class TrimVideoFragment : Fragment() {
                     binding.trimEndEt.text.toString().toInt()
                 )
             } catch (e: NumberFormatException) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.invalidInput),
-                    Toast.LENGTH_LONG
-                ).show()
+               showToast(getString(R.string.invalidInput))
             }
         }
         return binding.root
@@ -101,7 +97,8 @@ class TrimVideoFragment : Fragment() {
 
                         override fun onFinish() {
                             binding.trimBt.visibility = View.VISIBLE
-                            binding.progressbar.visibility = View.GONE
+                            binding.progressbar.visibility = View.INVISIBLE
+                            showToast(getString(R.string.finished))
                         }
                     })
                 } catch (e: FFmpegCommandAlreadyRunningException) {

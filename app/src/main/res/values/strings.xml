@@ -6,4 +6,5 @@
     <string name="play_video">Play Video</string>
     <string name="seconds">Seconds</string>
     <string name="invalidInput">Invalid input</string>
+    <string name="finished">Finished Trimming</string>
 </resources>

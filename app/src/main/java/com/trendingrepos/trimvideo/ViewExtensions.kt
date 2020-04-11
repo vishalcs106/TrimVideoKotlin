@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
@@ -61,4 +62,8 @@ fun Fragment.checkPermissionForVideo(requestCode: Int): Boolean {
         }
     }
     return false
+}
+
+fun Fragment.showToast(message: String){
+    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }
